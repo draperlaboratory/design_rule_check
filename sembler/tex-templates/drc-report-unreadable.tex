@@ -1,0 +1,69 @@
+\documentclass[twoside]{article}
+\usepackage{datetime2,hyperref,color,graphicx}
+% \input{sembler.sty}
+\title{Sembler DRC Report Content}
+\author{Nivair H. Gabriel}
+\date{\today}
+
+\begin{document}
+
+% \maketitle
+
+\section{Summary}
+\begin{tabular}{lr}
+Design file:& $<$FILENAME$>$.dxf\\
+Design status:& UNREADABLE\\
+Design rule check performed on:& \DTMnow\\
+Design Rule Checker (DRC) version:& $<$VERSION$>$\\
+\end{tabular}
+
+\section{Output}
+The DRC generated a ZIP file with feedback on your design. This ZIP file contains:
+\begin{itemize}
+\item \texttt{$<$FILENAME$>$.pdf}: this report
+\item \texttt{$<$FILENAME$>$.dxf}: your submitted design file
+\item \texttt{$<$FILENAME$>$-output.dxf}: an ``output DXF'' file that contains your design with notation from the DRC
+\end{itemize}
+This report guides you in interpreting the DRC feedback.
+
+\section{Design status}
+\subsection*{UNREADABLE}
+The Design Rule Checker could not read your design file. This occurs when your design contains one of the following:
+\begin{itemize}
+\item Open polylines
+\item Self-intersecting features
+\item Invalid entities such as splines
+\end{itemize}
+For more information, review the reported issues in this document, as well as the output DXF. When you have fixed these issues, resubmit your updated design. If you require assistance, contact \href{mailto:sembler@draper.com}{sembler@draper.com}.
+
+\section{Invalid input issues}
+\subsection{Issues per location}
+\begin{tabular}{l|c|c}
+ & \# Errors & \# Warnings \\
+ & (Design Rule violations)& (Design Guidelines exceeded) \\ \hline
+In multiple layers or overall design& 1& 0\\
+In  $<$LAYER$>$& 4& 0\\
+\end{tabular}
+
+\subsection{General design issues}
+\subsubsection{Die boundary missing}
+The design file does not contain a die boundary. The die boundary must be defined in the REF\_DIE\_BOUNDARY layer. To see an example of a defined die boundary, download the Sembler template files and open a blank design template.
+
+\subsection{Issues in $<$LAYER$>$}
+\subsubsection{Invalid entity}
+\par A feature in $<$LAYER$>$ is an entity that is not accepted by the DRC. Every feature must be a closed polyline consisting only of line and arc segments.
+\par See INVALID\_FEATURE layer in output DXF file.
+\subsubsection{Open polyline}
+\par A feature in $<$LAYER$>$ is an open polyline. All polylines must be closed.
+\par See INVALID\_OPEN\_FEATURE layer in output DXF file.
+\subsubsection{Self-intersecting feature}
+\par A feature in $<$LAYER$>$ intersects itself in one or more locations, as in the following example:
+\begin{figure}[!ht]
+\centering
+\includegraphics{self-intersect}
+\end{figure}
+\par See INVALID\_SELF\_INTERSECTING\_FEATURE layer in output DXF file.
+\subsubsection{Layer missing}
+\par Layer $<$LAYER$>$ is missing from the design file. The design must contain all standard Sembler layers as defined in the \href{https://sembler.draper.com/files/sembler_process_rules.pdf}{Sembler Design Rules and Process Description (PDF)}, even if some of these layers are empty. To see the required layers, download the Sembler template files and open a blank design template.
+
+\end{document}

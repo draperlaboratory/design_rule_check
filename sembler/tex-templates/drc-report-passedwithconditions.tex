@@ -1,0 +1,256 @@
+\documentclass[twoside]{article}
+\usepackage{datetime2,hyperref,color}
+% \input{sembler.sty}
+\title{Sembler DRC Report Content}
+\author{Nivair H. Gabriel}
+\date{\today}
+
+\begin{document}
+
+% \maketitle
+
+\section{Summary}
+\begin{tabular}{lr}
+Design file:& $<$FILENAME$>$.dxf\\
+Design status:& PASSED WITH CONDITIONS\\
+Design rule check performed on:& \DTMnow\\
+Design Rule Checker (DRC) version:& $<$VERSION$>$\\
+\end{tabular}
+
+\section{Output}
+The DRC generated a ZIP file with feedback on your design. This ZIP file contains:
+\begin{itemize}
+\item \texttt{$<$FILENAME$>$.pdf}: this report
+\item \texttt{$<$FILENAME$>$.dxf}: your submitted design file
+\item \texttt{$<$FILENAME$>$-output.dxf}: an ``output DXF'' file that contains your design with notation from the DRC
+\end{itemize}
+This report guides you in interpreting the DRC feedback.
+
+\section{Design status}
+\subsection*{PASSED WITH CONDITIONS}
+Your design has features that exceed one or more of the Design Guidelines (see
+\href{https://sembler.draper.com/files/sembler_process_rules.pdf}{Sembler Design
+  Rules and Process Description (PDF)}). Sembler can fabricate your device, but
+you assume some additional risk that the device might not function as you
+intend. To mitigate this risk, edit and resubmit your design until it passes the
+Design Rule Check with fewer or no conditions.
+
+For more information, review the reported warnings and the checkplots in this
+document, as well as the output DXF file. If you require assistance, contact
+\href{mailto:sembler@draper.com}{sembler@draper.com}.
+
+\section{Warnings}
+\subsection{Issues per location}
+\begin{tabular}{l|c}
+ & \# Warnings \\
+ & (Design Guidelines exceeded) \\ \hline
+In multiple layers or overall design& 10\\
+In L0\_METAL& 4\\
+In L1\_SU8 & 5\\
+In L2\_SU8 & 3\\
+In L3\_SU8 & 3\\
+\end{tabular}
+
+\subsection{General design issues}
+\subsubsection{Invalid port diameter}
+\par A port in VERTICAL\_PORT has a diameter that is not one of the specified
+acceptable values. Only 1 mm, 2 mm, or 3 mm (1000 $\mu$m, 2000 $\mu$m, or 3000
+$\mu$m) diameter holes can be punched. Ports that have other diameters will not
+be punched.  \par See WARN\_DIAMETER\_VERTICAL\_PORT layer in output DXF file.
+
+\subsubsection{Minimum port perimeter-to-perimeter distance not met}
+\par Ports are closer to each other than the recommended minimum distance. The
+minimum recommended distance between ports, from perimeter to perimeter, is 2 mm
+(2000 $\mu$m). Placing ports closer together than this minimum distance might
+result in poor bonding and fluid leakage.  \par See
+WARN\_MIN\_DIST\_EDGE2EDGE\_VERTICAL\_PORT layer in output DXF file.
+
+\subsubsection{Minimum distance from port perimeter to die edge not met}
+\par A fluidic port is closer to the edge of the die than the recommended
+minimum distance. The minimum recommended distance between the die boundary and
+the perimeter of a port used for fluidics is 2 mm (2000 $\mu$m).  \par See
+WARN\_MIN\_DIST\_DIE\_BOUNDARY\_EDGE\_VERTICAL\_PORT\_FLC layer in output DXF
+file.
+
+\subsubsection{Minimum support post diameter for L1\_SU8 not met}
+\par A support post for an L1\_SU8 feature has a diameter that is smaller than
+the recommended minimum diameter. The minimum recommended diameter for support
+posts for L1\_SU8 features is 20 $\mu$m. Note that the DRC automatically maps
+support posts to the SU-8 layers where features exist.  \par See
+WARN\_MIN\_DIAMETER\_SUPPORT\_POST\_L1\_SU8 layer in output DXF file.
+
+%% Not covered by any rule
+\subsubsection{Maximum distance between support posts in L1\_SU8 exceeded}
+Support posts for L1\_SU8 features are farther away from each other than the
+recommended maximum distance. The maximum recommended distance between support
+posts for L1\_SU8 features, from edge to edge, is 80 $\mu$m. Note that the DRC
+automatically maps support posts to the SU-8 layers where features exist.  \par
+See WARN\_MAX\_DIST\_EDGE2EDGE\_SUPPORT\_POST\_L1\_SU8 layer in output DXF file.
+
+\subsubsection{Minimum support post diameter for L2\_SU8 not met}
+\par A support post for an L2\_SU8 feature has a diameter that is smaller than
+the recommended minimum diameter. The minimum recommended diameter for support
+posts for L2\_SU8 features is 50 $\mu$m. Note that the DRC automatically maps
+support posts to the SU-8 layers where features exist, and that the total height
+of L2\_SU8 features is the combined thickness of L1\_SU8 and L2\_SU8.  \par See
+WARN\_MIN\_DIAMETER\_SUPPORT\_POST\_L2\_SU8 layer in output DXF file.
+
+%% Not covered by any rule
+\subsubsection{Maximum distance between support posts in L2\_SU8 exceeded}
+Support posts for L2\_SU8 features are farther away from each other than the
+recommended maximum distance. The maximum recommended distance between support
+posts for L2\_SU8 features, from edge to edge, is 200 $\mu$m. Note that the DRC
+automatically maps support posts to the SU-8 layers where features exist, and
+that the total height of L2\_SU8 features is the combined thickness of L1\_SU8
+and L2\_SU8.  \par See WARN\_MAX\_DIST\_EDGE2EDGE\_SUPPORT\_POST\_L2\_SU8 layer
+in output DXF file.
+
+\subsubsection{Minimum support post diameter for L3\_SU8 not met}
+\par A support post for an L3\_SU8 feature has a diameter that is smaller than
+the recommended minimum diameter. The minimum recommended diameter for support
+posts for L3\_SU8 features is 100 $\mu$m. Note that the DRC automatically maps
+support posts to the SU-8 layers where features exist, and that the total height
+of L3\_SU8 features is the combined thickness of L1\_SU8, L2\_SU8, and L3\_SU8.
+\par See WARN\_MIN\_DIAMETER\_SUPPORT\_POST\_L3\_SU8 layer in output DXF file.
+
+%% Not covered by any rule
+\subsubsection{Maximum distance between support posts in L3\_SU8 exceeded}
+Support posts for L3\_SU8 features are farther away from each other than the
+recommended maximum distance. The maximum recommended distance between support
+posts for L3\_SU8 features, from edge to edge, is 400 $\mu$m. Note that the DRC
+automatically maps support posts to the SU-8 layers where features exist, and
+that the total height of L3\_SU8 features is the combined thickness of L1\_SU8,
+L2\_SU8, and L3\_SU8.  \par See
+WARN\_MAX\_DIST\_EDGE2EDGE\_SUPPORT\_POST\_L3\_SU8 layer in output DXF file.
+
+\subsubsection{Incorrect number of alignment mark groupings}
+\par The design does not have the recommended number of alignment marks. For
+devices with a dimension larger than 2 cm (20000 $\mu$m), two groupings of
+alignment marks in opposite corners are recommended. To see the standard
+grouping of three alignment marks in the proper configuration (triangular
+pattern with no more than two co-linear), download the Sembler template files
+and open a blank template.  \par See
+WARN\_ARRANGEMENT\_ALIGNMENT\_MARK\_LARGE\_DIE layer in output DXF file.
+
+\subsection{Issues in L0\_METAL}
+\subsubsection{Minimum trace width not met}
+\par A metal trace has a width smaller than the recommended minimum. The minimum
+recommended metal trace width is 10 $\mu$m.  \par See
+WARN\_MIN\_WIDTH\_FEATURE\_METAL layer in output DXF file.
+
+\subsubsection{Minimum edge-to-edge distance not met}
+\par Metal traces are closer to each other than the recommended minimum
+distance. The minimum recommended distance between metal traces, from edge to
+edge, is 10 $\mu$m.  \par See WARN\_MIN\_DIST\_EDGE2EDGE\_METAL layer in output
+DXF file.
+
+\subsubsection{Minimum bond pad width not met}
+\par A metal bond pad has a width smaller than the recommended minimum. The
+minimum recommended metal bond pad width is 100 $\mu$m.  \par See
+WARN\_MIN\_WIDTH\_BONDPAD\_METAL layer in output DXF file.
+
+\subsubsection{Minimum center-to-center distance not met}
+\par Metal bond pads are closer to each other than the recommended minimum
+distance. The minimum recommended distance between metal bond pads, from center
+to center, is 500 $\mu$m.  \par See WARN\_MIN\_PITCH\_BONDPAD\_METAL layer in
+output DXF file.
+
+\subsection{Issues in L1\_SU8}
+\subsubsection{Minimum feature width not met}
+\par A feature in L1\_SU8 is narrower than the recommended minimum width. The
+minimum recommended width of L1\_SU8 features is 10 $\mu$m. A feature narrower
+than this might not resolve accurately.  \par See
+WARN\_MIN\_WIDTH\_FEATURE\_L1\_SU8 layer in output DXF file.
+
+\subsubsection{Maximum feature width exceeded}
+\par A feature in L1\_SU8 is wider than the recommended maximum width. The
+maximum recommended width of L1\_SU8 features is 80 $\mu$m. A feature wider than
+this runs the risk of collapse. To help prevent this, narrow the feature or add
+support posts.  \par See WARN\_MAX\_WIDTH \_FEATURE\_L1\_SU8 layer in output DXF
+file.
+
+\subsubsection{Minimum edge-to-edge distance not met}
+\par Features in L1\_SU8 are closer to each other than the recommended minimum
+distance. The minimum recommended distance between SU-8 features, from edge to
+edge, is 50 $\mu$m to prevent risk of poor bonding and fluid leakage.  \par See
+WARN\_MIN\_DIST\_EDGE2EDGE\_L1\_SU8 layer in output DXF file.
+
+\subsubsection{Minimum distance from L1\_SU8 edge to port perimeter not met}
+\par A feature in L1\_SU8 is closer to the perimeter of a port than the
+recommended minimum distance. The minimum recommended distance between the
+perimeter of a port and the edge of any SU-8 feature (except a channel entering
+the port) is 1 mm (1000 $\mu$m).  \par See
+WARN\_MIN\_DIST\_L1\_SU8\_EDGE\_VERTICAL\_PORT layer in output DXF file.
+
+\subsubsection{Minimum distance from L1\_SU8 edge to die boundary not met}
+\par A feature in L1\_SU8 (or an alignment mark in REF\_ALIGNMENT) is closer to
+the edge of the die boundary than the recommended minimum distance. The
+recommended minimum distance from the edge of an SU-8 feature or alignment mark
+to the edge of the die is 750 $\mu$m.  \par See
+WARN\_MIN\_DIST\_EDGE2EDGE\_BOUNDARY\_EDGE\_L1\_SU8 layer in output DXF file.
+
+\subsection{Issues in L2\_SU8}
+\subsubsection{Minimum feature width not met}
+\par A feature in L2\_SU8 is narrower than the recommended minimum width. The
+minimum recommended width of L2\_SU8 features is 25 $\mu$m. A feature narrower
+than this might not resolve accurately.  \par See
+WARN\_MIN\_WIDTH\_FEATURE\_L2\_SU8 layer in output DXF file.
+
+\subsubsection{Maximum feature width exceeded}
+\par A feature in L2\_SU8 is wider than the recommended maximum width. The
+maximum recommended width of L2\_SU8 features is 200 $\mu$m. A feature wider
+than this runs the risk of collapse. To help prevent this, narrow the feature or
+add support posts.  \par See WARN\_MAX\_WIDTH\_FEATURE\_L2\_SU8 layer in output
+DXF file.
+
+\subsubsection{Minimum edge-to-edge distance not met}
+\par Features in L2\_SU8 are closer to each other than the recommended minimum
+distance. The minimum recommended distance between SU-8 features, from edge to
+edge, is 50 $\mu$m.  \par See WARN\_MIN\_DIST\_EDGE2EDGE\_L2\_SU8 layer in
+output DXF file.
+
+%% Not captured by any rule
+\subsubsection{Minimum distance from L2\_SU8 edge to die boundary not met}
+\par A feature in L2\_SU8 (or an alignment mark in REF\_ALIGNMENT) is closer to
+the edge of the die boundary than the recommended minimum distance. The
+recommended minimum distance from the edge of an SU-8 feature or alignment mark
+to the edge of the die is 750 $\mu$m.  \par See
+WARN\_MIN\_DIST\_EDGE2EDGE\_BOUNDARY\_EDGE\_L2\_SU8 layer in output DXF file.
+
+\subsection{Issues in L3\_SU8}
+\subsubsection{Minimum feature width not met}
+\par A feature in L3\_SU8 is narrower than the recommended minimum width. The
+minimum recommended width of L3\_SU8 features is 50 $\mu$m. A feature narrower
+than this might not resolve accurately.  \par See
+WARN\_MIN\_WIDTH\_FEATURE\_L3\_SU8 layer in output DXF file.
+
+\subsubsection{Maximum feature width exceeded}
+\par A feature in L3\_SU8 is wider than the recommended maximum width. The
+maximum recommended width of L3\_SU8 features is 400 $\mu$m. A feature wider
+than this runs the risk of collapse. To help prevent this, narrow the feature or
+add support posts.  \par See WARN\_MAX\_WIDTH\_FEATURE\_L3\_SU8 layer in output
+DXF file.
+
+\subsubsection{Minimum edge-to-edge distance not met}
+\par Features in L3\_SU8 are closer to each other than the recommended minimum
+distance. The minimum recommended distance between SU-8 features, from edge to
+edge, is 50 $\mu$m.  \par See WARN\_MIN\_DIST\_EDGE2EDGE\_L3\_SU8 layer in
+output DXF file.
+
+%% Not captured by any rule
+\subsubsection{Minimum distance from L3\_SU8 edge to die boundary not met}
+\par A feature in L3\_SU8 (or an alignment mark in REF\_ALIGNMENT) is closer to
+the edge of the die boundary than the recommended minimum distance. The
+recommended minimum distance from the edge of an SU-8 feature or alignment mark
+to the edge of the die is 750 $\mu$m.  \par See
+WARN\_MIN\_DIST\_EDGE2EDGE\_BOUNDARY\_EDGE\_L3\_SU8 layer in output DXF file.
+
+\section{Checkplots}
+Review the checkplots for the SU-8 and metal layers to verify that the Design
+Rule Checker correctly interprets your design.  \par Fluidic and metal features
+appear in white, while substrate and bulk PDMS appear in gray. For reference,
+ports and alignment marks are shown in each layer as black dashed lines. Note
+also that the DRC automatically maps support posts to the SU-8 layers where
+features exist.
+
+\end{document}

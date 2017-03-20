@@ -1,0 +1,34 @@
+\documentclass[twoside]{article}
+\usepackage{datetime2,hyperref,color}
+% \input{sembler.sty}
+\title{Sembler DRC Report Content}
+\author{Nivair H. Gabriel}
+\date{\today}
+
+\begin{document}
+% \maketitle
+
+\section{Summary}
+\begin{tabular}{lr}
+Design file:& $<$FILENAME$>$.dxf\\
+Design status:& $<$STATUS$>$\\
+Design rule check performed on:& \DTMnow\\
+Design Rule Checker (DRC) version:& $<$VERSION$>$\\
+\end{tabular}
+
+\section{Output}
+The DRC generated a ZIP file with feedback on your design. This ZIP file contains:
+\begin{itemize}
+\item \texttt{$<$FILENAME$>$.pdf}: this report
+\item \texttt{$<$FILENAME$>$.dxf}: your submitted design file
+\end{itemize}
+
+\section{Design status}
+\subsection*{PASSED}
+Success! Your design has passed the Design Rule Check with no rule violations and without exceeding any guidelines.
+
+\section{Checkplots}
+Review the checkplots for the SU-8 and metal layers to verify that the Design Rule Checker correctly interprets your design.
+\par Fluidic and metal features appear in white, while substrate and bulk PDMS appear in gray. For reference, ports and alignment marks are shown in each layer as black dashed lines. Note also that the DRC automatically maps support posts to the SU-8 layers where features exist.
+
+\end{document}

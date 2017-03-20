@@ -1,0 +1,26 @@
+%% Style file for the sembler process
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sembler}
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\RequirePackage{hyperref}
+%% Set up our colors to match the style guide
+\definecolor{coolBlack}{rgb}  {0.157, 0.247 , 0.302}
+\definecolor{draperRed}{rgb}  {1    , 0.275 , 0.071}
+\definecolor{semblerBlue}{rgb}{0.255, 0.671 , 0.878}
+\definecolor{printBlack}{rgb} {0.067, 0.094 , 0.125}
+%% Note white isn't in spec
+
+%% Set up the fonts
+\renewcommand{\rmdefault}{gothic}
+\renewcommand{\sfdefault}{gothic}
+\renewcommand{\ttdefault}{gothic}
+
+\newcommand \sect[1]{\section{\textcolor{draperRed}{#1}}}
+\newcommand \subsect[1]{\subsection{\textcolor{semblerBlue}{#1}}}
+\newcommand \puritysect[1]{\subsection{\textcolor{draperRed}{#1}}}
+\newcommand \rulesect[1]{\subsection{\textcolor{coolBlack}{#1}}}
+\newcommand \suggsect[1]{\subsection{\textcolor{semblerBlue}{#1}}}
+\newcommand \addpage[1]{\begin{center}\includegraphics[width=\textwidth,
+      height=\textheight, keepaspectratio]{#1}\end{center}}

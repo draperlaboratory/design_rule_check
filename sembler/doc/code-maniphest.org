@@ -1,0 +1,180 @@
+* sembler
+** sembler.sh
+   The real entry point to sembler.  A wrapper around sembler.py that deals
+   with catastrophic failure of the python process, or being unable to read /
+   write the input / output directories.
+
+** sembler.py
+   Python entry to the DRC. Its largely the glue code that exist between
+   ingesting cad files (dxfparser), validating those desgins (checker, rules),
+   and generating output (checker).
+
+* dxfparser
+** dxf2shapely.py
+   The ingestion code.  Converts dxf entities into something that the rule
+   checker can really understand, shapely objects.
+** dxfconstants.py
+   Constants about dxf files (layer names and so on), shared by parsing and the
+   checker.
+** dxfparser.py
+   the first stage in ingestion. Pulls apart layers, building a separate
+   dictionary of dxf objects for each layer, that are then further handled by
+   the dxfvalidator and the dxf2shapely calls.
+** dxfplotter.py
+   Renders dxf to a pyplot window.  Primarily debugging oriented.
+** dxfvalidator.py
+   Purity checks on ingestion.  Does the DXF adhere to the rules we laid down
+   for the sembler process (no open poly lines, splines aren't present, etc)
+** dxfwriter.py
+   Converts DesignDict representation of design (and violations) back into dxf
+   output for the designer to examine.
+** main.py
+   Empty
+
+* checker
+** DesignDict.py
+   Represents the entire design submitted to the sembler process.  Wraps layers
+   in the input cad (e.g. vports, posts, METAL). Also helps ingest objects from
+   the dxfparser.  Effectively, create an empty dictionary, and add elements one
+   at a time. They end up on the correct layer and in the correct spatial index.
+
+   The dictionary also contains the logic for running each of the rules against
+   itself, which it probably shouldn't.
+** DesignObject.py
+   describes the objects that the drc is capable of reasoning about. Features,
+   ports, and posts as of launch.  Pulls together identification, geometry
+   information, and some semantic information about the objects in the design
+   into a single object.
+** Layer.py
+   representation of a layer of the design, e.g. L1_SU8. Wraps a dictionary of
+   the objects and a spatial index (rectangle tree) of those objectws together.
+** Rule.py
+   parent class to all of the rules in the rules subdirectory. Wraps
+   information about rules, how to check them, they're identifier, the text to
+   be output to the summary output, and the layer to render the violations to.
+** TexOutput.py
+   Generates the LaTex of the summary output.  Also invokes pdflatex on that
+   output to generate a pdf from the latex
+** Violation.py
+   Abstract representation of a rule violation.  Wraps the offending objects
+   and rule together into a dictionary for easy output.
+** Visualization.py
+   Check plot generation.  Converts the representation of the device held by
+   the design dictionary into checkplots used in the summary output.
+
+* rules
+** MaxLineWidth.py
+   Shared cod for checking the maximum width of a feature.  If features are too
+   wide, they can either cause a short, if in the metal layer, or a collapse, if
+   in the SU8 layers.  This code enforces rules intended to prevent that.
+** samplingSize.py
+   support code for MaxLineWidth. Sampling based approach to figure out what
+   the largest circle inscribable in a layer is.
+** LayerMinDist.py
+   Shared code for checking minimum spacing between all features in all real
+   layers.  Port-to-port distance is checked by another rule.
+** SupportCheck.py
+   Makes sure that features in SU8 are supported from below.  That is, you
+   can't have a feature in L2_SU8 without having a feature totally encompassing
+   it in L1_SU8.
+** LayerMinLinewidth.py
+   Shared code for checking each feature of each layer is sufficiently wide.
+** LayerBorderBuffer.py
+   Shared code for checking that each layer has features sufficiently far away
+   from the die border.
+** PostDepth.py
+   Figures out which layers support posts need to exist on, and adds them to
+   each of those layers.  Currently, posts are defined on a single layer, but
+   they must exist inside of SU8. We figure out what the deepest cavity is in
+   the SU8, and then replicate the post on every layer from L1_SU8 to the
+   deepest layer.
+** Rule03.py
+   Ensures minimum die dimmension
+** Rule04.py
+   Ensures maximum die dimmension
+** Rule05.py
+   Minimum line width of metal features
+** Rule06.py
+   Metal minimum feature to feature distances
+** Rule08.py
+   Metal, feature center to center distance minimum. Meant to prevent shorts I
+   think.
+** Rule09.py
+   Minimum line width of a feature in L1_SU8
+** Rule10.py
+   Maximum width of a feature in L1_SU8
+** Rule11.py
+   Minimum Support Post Diameter of a post in L1_SU8
+** Rule12.py
+   Minimum Feature to Feature distance in L1_SU8
+** Rule13.py
+   Minimum line width of a feature in L2_SU8
+** Rule14.py
+   Maximum line width of a feature in L2_SU8
+** Rule15.py
+   Minimum support post diameter of a post reaching L2_SU8
+** Rule16.py
+   Minimum feature-to-feature distance in L2_SU8
+** Rule17.py
+   L2_SU8 must have L1_SU8 defined beneath it
+** Rule18.py
+   Minimum width of an L3_SU8 feature
+** Rule19.py
+   Maximum width of an L3_SU8 feature
+** Rule20.py
+   Minimum diameter of a support post reaching L3_SU8
+** Rule21.py
+   Minimum feature-to-feature distance of L3_SU8
+** Rule22.py
+   L3_SU8 must have L2_SU8 defined beneath it
+** Rule23.py
+   Port radii must be selected from a predefined list
+** Rule24.py
+   Minimum port-to-port distance
+** Rule25.py
+   Port-to-boundary constraint (liquid)
+** Rule26.py
+   Port-to-boundary constraint (relief cut for diode)
+** Rule27.py
+   L1_SU8 features must be a certain distance away from ports
+
+   Note that this, combined with support requirements, also forces this on L2_SU8
+   and L3_SU8, which is why we only check L1_SU8
+** Rule30.py
+   Minimum distance between alignment marks, also alignment marks must not be
+   co-linear (a triangle, square, etc. is required)
+** Rule31.py
+   Minimum distance between alignment marks and border
+** Rule32.py
+   Minimum number of alignment marks. This differs based on die size.
+** Rule34.py
+   Is an object outside the border
+** Rule35.py
+   L1_SU8 feature sufficiently within border
+** Rule36.py
+   Minimum line width of bond pad -- are the pads large enough for someone to
+   solder something to?
+** Rule37.py
+   A different size constraint onbond pads, again ensuring they are large
+   enough for a human to attach something to them.
+** Rule38.py
+   Minimum distance between bond pads
+
+* libraries
+** python
+*** os
+*** sys
+*** argparse
+*** ezdxf
+*** time
+*** logging
+*** json
+*** dxfgrabber
+*** shapely
+** c
+
+* external progrmas
+** pdflatex
+** ogr2ogr
+** bash
+** git

@@ -1,0 +1,32 @@
+* General Use of Branches
+
+  In general, we want to use branches for one of three reasons.  Either we have
+  a new release candidate that we are working on (think of this as the trunk of
+  a development branch), we have a feature we are adding in, or we have a bug
+  that we are trying to fix.  For bugs and features, we want a branch per
+  feature or a branch per bug respectively.
+
+** Branches for Features
+
+
+   Try to name these something along the line of FEAT_#### where #### is the
+   numeric ID that's capturing the feature to be added inside of jira
+
+** Branches for Bug Fixes
+
+   Try to name these something along the line of BUGFIX_#### where #### is the
+   numeric ID that's capturing the bug inside of Jira
+
+** Branches for Releases
+   name these RC_##, increasing from 00 out to 99.
+
+* Release Candidates
+  After release N, we can use release candidate branch N+1 as our main
+  development branch.
+
+  When we do a deploy, we should add a git tag with the date of the deployment,
+  maybe the name of the developer that did the deployment.
+
+
+* Releasing
+  See deployment.org for instructions on deploying

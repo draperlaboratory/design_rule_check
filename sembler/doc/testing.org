@@ -1,0 +1,32 @@
+* Unit Tests
+** Rule tests
+   These tests exist to exercise the logic in each of the rules described in
+   sembler/checker/rules/, e.g. all of the design rules.
+*** Test##.py
+ run by invoking test_main.py.  Considering how much rule numbers have changed,
+ and how little attention these have received, these are certainly bitrotted.
+ They'd need to be remapped so that they discuss the correct rules.
+** Ingestion Tests
+   I don't thin we have any of these.  We should add them.
+* End-to-End tests
+** alpha
+   So much has changed about input requirements that these should all now fail
+   purity checks.  They are only useful as a test of that.
+** beta
+   As with the alpha input
+** launch_tests
+   These are the tests we used to check the DRC right after launch of sembler.
+
+   TODO -- Maniphest of these files, what we expect the output to be.
+** system_tests
+   These are the instances we were using to test the DRC up to launch.  About
+   half of the instances are purity failures, the rest actually exercise some
+   of the behavior of the drc.
+
+   TODO -- Maniphest of the files, which pass purity, what the expected
+   behavior is.
+*** runSalilTests.sh
+    A script for running the examples in system tests
+** templates
+   The templates that we hand out to developers using the sembler
+   process. These must pass.

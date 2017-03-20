@@ -1,0 +1,142 @@
+\documentclass[twoside]{article}
+\usepackage{datetime2,hyperref,color}
+% \input{sembler.sty}
+\title{Sembler DRC Report Content}
+\author{Nivair H. Gabriel}
+\date{\today}
+
+\begin{document}
+
+% \maketitle
+
+\section{Summary}
+\begin{tabular}{lr}
+Design file:& $<$FILENAME$>$.dxf\\
+Design status:& FAILED\\
+Design rule check performed on:& \DTMnow\\
+Design Rule Checker (DRC) version:& $<$VERSION$>$\\
+\end{tabular}
+
+\section{Output}
+The DRC generated a ZIP file with feedback on your design. This ZIP file
+contains:
+\begin{itemize}
+\item \texttt{$<$FILENAME$>$.pdf}: this report
+\item \texttt{$<$FILENAME$>$.dxf}: your submitted design file
+\item \texttt{$<$FILENAME$>$-output.dxf}: an ``output DXF'' file that contains your design with notation from the DRC
+\end{itemize}
+This report guides you in interpreting the DRC feedback.
+
+\section{Design status}
+\subsection*{FAILED}
+Your design has features that violate one or more of the Design Rules (see
+\href{https://sembler.draper.com/files/sembler_process_rules.pdf}{Sembler Design
+  Rules and Process Description (PDF)}). In order for Sembler to fabricate your
+design, it needs to pass the Design Rule Check with no rule violations.
+
+For more information, review the reported errors and the checkplots in this
+document, as well as the output DXF file. When you have fixed these errors,
+resubmit your updated design. If you require assistance, contact
+\href{mailto:sembler@draper.com}{sembler@draper.com}.
+
+\section{Errors and Warnings}
+\subsection{Issues per location}
+\begin{tabular}{l|c|c}
+ & \# Errors & \# Warnings \\
+ & (Design Rule violations)& (Design Guidelines exceeded) \\ \hline
+In multiple layers or overall design& 6& 0\\
+In L0\_METAL& 1& 0\\
+In L1\_SU8 & 1& 0\\
+In L2\_SU8 & 2& 0\\
+In L3\_SU8 & 2& 0\\
+\end{tabular}
+
+\subsection{General design issues}
+
+\subsubsection{Die boundary too small}
+\par The die boundary is smaller than the minimum die size. The die must be at
+least 1 cm x 1 cm (10000 $\mu$m x 10000 $\mu$m).  \par See
+ERR\_MIN\_WIDTH\_FEATURE\_DIE\_BOUNDARY layer in output DXF file.
+
+\subsubsection{Die boundary too large}
+\par The die boundary is larger than the maximum die size. A rectangular die has
+dimensions ranging in integral sizes from 1 cm x 1 cm (10000 $\mu$m x 10000
+$\mu$m) to 4 cm x 4 cm (40000 $\mu$m x 40000 $\mu$m), or microscope slide
+dimensions of 2.5 cm x 7.5 cm (25000 $\mu$m x 75000 $\mu$m).  \par See
+ERR\_MAX\_WIDTH\_FEATURE\_DIE\_BOUNDARY layer in output DXF file.
+
+\subsubsection{Die boundary not rectangular}
+\par The die boundary must be rectangular. Dies are available in rectangular
+shapes with integral dimensions ranging from 1 cm x 1 cm (10000 $\mu$m x 10000
+$\mu$m) to 4 cm x 4 cm (40000 $\mu$m x 40000 $\mu$m), or with microscope slide
+dimensions of 2.5 cm x 7.5 cm (25000 $\mu$m x 75000 $\mu$m).  \par See
+ERR\_SHAPE\_DIE\_BOUNDARY layer in output DXF file.
+
+\subsubsection{Die boundary not in standard size}
+\par The die boundary must be the size of one of Sembler's standard dies. Dies
+are available in rectangular shapes with integral dimensions ranging from 1 cm x
+1 cm (10000 $\mu$m x 10000 $\mu$m) to 4 cm x 4 cm (40000 $\mu$m x 40000 $\mu$m),
+or with microscope slide dimensions of 2.5 cm x 7.5 cm (25000 $\mu$m x 75000
+$\mu$m).  \par See ERR\_SIZE\_DIE\_BOUNDARY layer in output DXF file.
+
+\subsubsection{Too few alignment marks}
+\par Three alignment marks in proper configuration must be present. To see
+predefined alignment marks in proper configuration (triangular pattern with no
+more than two co-linear), download the Sembler template files and open a blank
+design template.  \par See ERR\_NUMBER\_ALIGNMENT\_MARK layer in output DXF
+file.
+
+\subsubsection{Alignment marks not in proper configuration}
+\par Three alignment marks in proper configuration must be present. To see
+predefined alignment marks in proper configuration (triangular pattern with no
+more than two co-linear), download the Sembler template files and open a blank
+design template.  \par See ERR\_ARRANGEMENT\_ALIGNMENT\_MARK layer in output DXF
+file.
+
+\subsection{Issues in L0\_METAL}
+
+\subsubsection{Feature outside die boundary}
+\par A feature in L0\_METAL is outside the die boundary. The die boundary must
+enclose all metal features.  \par See ERR\_ENCLOSE\_L0\_METAL\_IN\_DIE\_BOUNDARY
+layer in output DXF file.
+
+\subsection{Issues in L1\_SU8}
+
+\subsubsection{Feature outside die boundary}
+\par A feature in L1\_SU8 is outside the die boundary. The die boundary must
+enclose all SU-8 features.  \par See ERR\_ENCLOSE\_L1\_SU8\_IN\_DIE\_BOUNDARY
+layer in output DXF file.
+
+\subsection{Issues in L2\_SU8}
+
+\subsubsection{Feature outside die boundary}
+\par A feature in L2\_SU8 is outside the die boundary. The die boundary must
+enclose all SU-8 features.  \par See ERR\_ENCLOSE\_L2\_SU8\_IN\_DIE\_BOUNDARY
+layer in output DXF file.
+
+\subsubsection{Unsupported L2\_SU8 feature}
+\par A feature in L2\_SU8 is not supported by L1\_SU8 below it. All L2\_SU8
+features must have L1\_SU8 features defined beneath them.  \par See
+ERR\_ENCLOSE\_ALL\_L2\_SU8\_IN\_L1\_SU8 layer in output DXF file.
+
+\subsection{Issues in L3\_SU8}
+
+\subsubsection{Feature outside die boundary}
+\par A feature in L3\_SU8 is outside the die boundary. The die boundary must
+enclose all SU-8 features.  \par See ERR\_ENCLOSE\_L3\_SU8\_IN\_DIE\_BOUNDARY
+layer in output DXF file.
+
+\subsubsection{Unsupported L3\_SU8 feature}
+\par A feature in L3\_SU8 is not supported by L2\_SU8 below it. All L3\_SU8
+features must have L2\_SU8 features defined beneath them.  \par See
+ERR\_ENCLOSE\_ALL\_L3\_SU8\_IN\_L2\_SU8 layer in output DXF file.
+
+\section{Checkplots}
+Review the checkplots for the SU-8 and metal layers to verify that the Design
+Rule Checker correctly interprets your design.  \par Fluidic and metal features
+appear in white, while substrate and bulk PDMS appear in gray. For reference,
+ports and alignment marks are shown in each layer as black dashed lines. Note
+also that the DRC automatically maps support posts to the SU-8 layers where
+features exist.
+
+\end{document}

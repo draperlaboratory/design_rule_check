@@ -1,0 +1,10 @@
+* Current Deployment Technique
+** Mark's pushing script
+** putting pushed code in place
+
+* Target Deployment Technique
+** Tag revision for deployment
+** Check out tagged revision on app server
+** Validate revision on app server
+** move revision from staging to live
+** update symbolic link
